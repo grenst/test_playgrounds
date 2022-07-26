@@ -10,10 +10,18 @@
 
 body {
   min-height: 100vh;
-  min-width: 400px;
   font-family: sans-serif;
-  padding: 0 20px;
   background: #1f2128;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+}
+
+.weather-app {
+  min-width: 400px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,27 +31,19 @@ body {
 
 .name-app {
   text-transform: uppercase;
-  font-weight: 900;
-  font-style: italic;
   font-size: 3rem;
-  color: #ee6352;
-  line-height: 0.8;
-  margin: 0;
-  display: inline-block;
+  margin: 20px;
+  text-align: center;
 }
 
 h1 {
   text-align: center;
   font-weight: 900;
-  margin: 0;
   font-size: 34px;
   line-height: 48px;
   color: antiquewhite;
-}
-
-h1 h2,
-h3 {
-  color: #231d3c;
+  font-style: italic;
+  display: inline;
 }
 
 #magic {
@@ -173,4 +173,16 @@ input {
 
 #date {
   font-size: 12px;
+}
+
+.footer {
+  position: sticky bottom;
+  font-size: x-small;
+  color: beige;
+  padding-right: 200px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #ee6352;
 }

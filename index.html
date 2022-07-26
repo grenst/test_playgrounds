@@ -7,41 +7,46 @@
     <script src="https://kit.fontawesome.com/42b6c4a57d.js" crossorigin="anonymous"></script>
     <link href="src/styles.css" rel="stylesheet" type="text/css" />
   </head>
-
+  
   <body>
-    <img src="images/logo.png" alt="She Codes Plus Logo" class="logo" />
-    <div class="name-app"> <h1>Weather App 😃</h1></div>
-    <div class="container">
-      <div class="search">
-        <div class="search-bar">
-          <div class="search-barinput">
-            <button type="button" class="search-button loc" id="location">
-              <i class="fa-solid fa-location-crosshairs"></i>
-            </button>
-            <!-- <form id="form" onsubmit="submitLoginForm(event)"> -->
-            <form id="form">
-              <input type="text" name="name" class="search-bar__input" placeholder="Search">
-              <button type="submit" value="Login" class="search-button"><i class="fas fa-search"></i></button>
-            </form>
+    <div class="weather-app">
+      <img src="images/logo.png" alt="She Codes Plus Logo" class="logo" />
+      <div class="name-app"> <h1>Weather App </h1>😃</div>
+      <div class="container">
+        <div class="search">
+          <div class="search-bar">
+            <div class="search-barinput">
+              <button type="button" class="search-button loc" id="location">
+                <i class="fa-solid fa-location-crosshairs"></i>
+              </button>
+              <!-- <form id="form" onsubmit="submitLoginForm(event)"> -->
+                <form id="form">
+                  <input type="text" name="name" class="search-bar__input" placeholder="Search">
+                  <button type="submit" value="Login" class="search-button"><i class="fas fa-search"></i></button>
+                </form>
+              </div>
             </div>
-        </div>
-      </div>
-      <p>
-        <div class="city-info">
-          <div class="city-name" id="city">New York</div>
-          <div class="info" id="date">Thursday 15:34</div>
-          <div class="info" id="sky">Clear</div>
-        </div>
-        <div class="numbers">
-          <div class="temperature">
-            <span class="temp" id="magic">29<span id="units">°C</span></span>
           </div>
-          <div class="info">
-            <div class="humi">Humidity: 70%</div>
-            <div class="wind">Wind: 5 km/h</div>
-          </div>
+          <p>
+            <div class="city-info">
+              <div class="city-name" id="city">New York</div>
+              <div class="info" id="date">Thursday 15:34</div>
+              <div class="info" id="sky">Clear</div>
+            </div>
+            <div class="numbers">
+              <div class="temperature">
+                <span class="temp" id="magic">29<span id="units">°C</span></span>
+              </div>
+              <div class="info">
+                <div class="humi">Humidity: 70%</div>
+                <div class="wind">Wind: 5 km/h</div>
+              </div>
+            </div>
+          </p>
         </div>
-      </p>
+    </div>
+    <div class="footer">
+      <span><a class="footer-link" href="https://github.com/grenst/test_playgrounds" target="_blank">Open-sourse code</a></span> by Makarova Olena
     </div>
     <script src="src/index.js"></script>
   </body>
