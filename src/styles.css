@@ -95,10 +95,11 @@ h1 {
 .search-barinput {
   display: flex;
   flex-direction: row;
-  border: 2px solid rgb(230, 197, 135);
+  border: 1px solid rgb(230, 197, 135);
   background-color: #1a2038;
   border-radius: 25px;
   padding: 3px;
+  box-shadow: 3px 3px 15px 5px rgba(20, 20, 0, 0.3);
 }
 
 .search-bar__input {
@@ -149,6 +150,7 @@ input {
   object-position: var(--pos);
   border-radius: 40px;
   margin-right: 30px;
+  box-shadow: 3px 3px 10px 5px rgba(151, 87, 255, 0.2);
 }
 
 .logo {
