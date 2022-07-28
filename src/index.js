@@ -36,10 +36,26 @@ function getData(response) {
   cityLable.innerHTML = `${cityName} <span class="info">|${country}</span>`;
   cityHumid.innerHTML = `Humidity: ${hummi}%`;
   windCity.innerHTML = `Wind: ${windSp} km/h`;
-  skyCity.innerHTML = `Sky: ${sky}`;
+  skyCity.innerHTML = `Sky: ${imgSky(sky)}`;
   document.getElementById("magic").style.opacity = "1";
   let url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(url).then(graphic);
+}
+
+function imgSky(value) {
+  let skyPos = document.querySelector(".sky-icon");
+  if (value === "Clear") {
+    skyPos.style.setProperty("--pos", `-125px -40px`);
+    return value;
+  } else {
+    if (value === "Rain") {
+      skyPos.style.setProperty("--pos", `-225px -230px`);
+      return value;
+    } else {
+      skyPos.style.setProperty("--pos", `-375px -40px`);
+      return value;
+    }
+  }
 }
 
 function chekerUnits() {

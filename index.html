@@ -19,44 +19,45 @@
               <button type="button" class="search-button loc" id="location">
                 <i class="fa-solid fa-location-crosshairs"></i>
               </button>
-              <!-- <form id="form" onsubmit="submitLoginForm(event)"> -->
-                <form id="form">
-                  <input type="text" name="name" class="search-bar__input" placeholder="Search">
-                  <button type="submit" value="Login" class="search-button"><i class="fas fa-search"></i></button>
-                </form>
-              </div>
+              <form id="form">
+                <input type="text" name="name" class="search-bar__input" placeholder="Search">
+                <button type="submit" value="Login" class="search-button"><i class="fas fa-search"></i></button>
+              </form>
             </div>
           </div>
-          <div class="city-info">
-              <div class="city-name" id="city">-- --  | --</div>
-              <div class="info" id="date">----- --:--</div>
-              <div class="info" id="sky">----</div>
+          <div class="weather-img">
+            <img class="sky-icon" src="/images/Weather-Icons.gif" alt="">
+          </div>
+        </div>
+        <div class="city-info">
+            <div class="city-name" id="city">-- --  | --</div>
+            <div class="info" id="date">----- --:--</div>
+          </div>
+          <div class="numbers">
+            <div class="temperature">
+              <span class="temp" id="magic">--</span><span id="units"><strong>°C</strong> |°F</span>
             </div>
-            <div class="numbers">
-              <div class="temperature">
-                <span class="temp" id="magic">--</span><span id="units"><strong>°C</strong> |°F</span>
-              </div>
-              <div class="info">
-                <div class="humi">Humidity: --%</div>
-                <div class="wind">Wind: - km/h</div>
-              </div>
+            <div class="info">
+              <span class="info" id="sky">----</span>
+              <div class="humi">Humidity: --%</div>
+              <div class="wind">Wind: - km/h</div>
             </div>
-            <div class="hours">
-              <div class="point1">09</div>
-              <div class="point2">12</div>
-              <div class="point3">15</div>
-              <div class="point4">18</div>
-              <div class="point5">21</div>
-            </div>
-            <div class="days-graph">
-            </div>
-            <div class="hours-predict">
-              <div class="time1">1</div>
-              <div class="time2">2</div>
-              <div class="time3">3</div>
-              <div class="time4">4</div>
-              <div class="time5">5</div>
-            </div>
+          </div>
+          <div class="hours">
+            <div class="point1">09</div>
+            <div class="point2">12</div>
+            <div class="point3">15</div>
+            <div class="point4">18</div>
+            <div class="point5">21</div>
+          </div>
+          <div class="days-graph">
+          </div>
+          <div class="hours-predict">
+            <div class="time1">1</div>
+            <div class="time2">2</div>
+            <div class="time3">3</div>
+            <div class="time4">4</div>
+            <div class="time5">5</div>
           </div>
         </div>
       </div>
