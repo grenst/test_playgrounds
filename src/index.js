@@ -1,5 +1,4 @@
 const apiKey = "fe0e0a19e1606bdfe513d213f2be135a";
-let cityName;
 
 function weatherStart(temp) {
   cityName = temp;
@@ -15,6 +14,7 @@ function demoStart() {
 }
 
 let unit;
+let cityName;
 let cityTemp;
 demoStart();
 

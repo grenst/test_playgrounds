@@ -201,6 +201,7 @@ input {
   font-size: 30px;
   font-weight: 100;
   color: rgb(0, 255, 242);
+  cursor: pointer;
 }
 
 strong {
