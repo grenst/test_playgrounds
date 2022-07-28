@@ -133,7 +133,7 @@ function zeroBefore(inver) {
 }
 
 function persGraf(vari) {
-  let a = 100 - (vari - 10) * 5;
+  let a = 100 - (vari - 8) * 4;
   return a;
 }
 
