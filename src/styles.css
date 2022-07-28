@@ -169,7 +169,7 @@ input {
 }
 
 .city-name {
-  color: rgb(165, 165, 149);
+  color: rgb(238, 238, 209);
   font-size: 40px;
 }
 
@@ -182,24 +182,34 @@ input {
 .numbers {
   display: flex;
   height: 77px;
-  gap: 250px;
+  gap: 130px;
 }
 
 .temperature {
   font-size: 15px;
+  width: 250px;
   display: flex;
-  flex-wrap: wrap;
-  align-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 #units {
-  padding-top: 15px;
-  font-size: 16px;
+  margin-top: 0px;
+  padding-bottom: 38px;
+  width: 150px;
+  font-size: 30px;
+  font-weight: 100;
+  color: rgb(0, 255, 242);
+}
+
+strong {
+  color: white;
 }
 
 .temp {
   font-size: 86px;
-  display: flex;
+  display: inline;
   transition: all 0.3s;
 }
 

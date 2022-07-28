@@ -1,9 +1,25 @@
-let apiKey = "fe0e0a19e1606bdfe513d213f2be135a";
-let url = `https://api.openweathermap.org/data/2.5/weather?q=New%20York&units=metric&appid=${apiKey}`;
-axios.get(url).then(getData);
+const apiKey = "fe0e0a19e1606bdfe513d213f2be135a";
+let cityName;
+
+function weatherStart(temp) {
+  cityName = temp;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityTemp}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(getData);
+}
+
+function demoStart() {
+  unit = "c";
+  cityName = "Lisabon";
+  cityTemp = cityName;
+  weatherStart(cityName);
+}
+
+let unit;
+let cityTemp;
+demoStart();
 
 function getData(response) {
-  let cityName = response.data.name;
+  cityName = response.data.name;
   let temperature = response.data.main.temp;
   let temp = Math.round(temperature);
   let windSpeed = response.data.wind.speed;
@@ -16,7 +32,7 @@ function getData(response) {
   let cityHumid = document.querySelector(".humi");
   let windCity = document.querySelector(".wind");
   let skyCity = document.querySelector("#sky");
-  tempo.innerHTML = `${temp}<span id="units">°C</span>`;
+  tempo.innerHTML = `${c2f(temp)}`;
   cityLable.innerHTML = `${cityName} <span class="info">|${country}</span>`;
   cityHumid.innerHTML = `Humidity: ${hummi}%`;
   windCity.innerHTML = `Wind: ${windSp} km/h`;
@@ -24,6 +40,30 @@ function getData(response) {
   document.getElementById("magic").style.opacity = "1";
   let url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(url).then(graphic);
+}
+
+function chekerUnits() {
+  if (unit === "c") {
+    weatherStart();
+    unit = "f";
+  } else {
+    weatherStart();
+    unit = "c";
+  }
+}
+
+let searchUnit = document.getElementById("units");
+searchUnit.addEventListener("click", chekerUnits);
+
+function c2f(tempUnit) {
+  if (unit === "c") {
+    searchUnit.innerHTML = `<strong>°C</strong> |°F`;
+    return tempUnit;
+  } else {
+    let f = Math.round(tempUnit * 1.8 + 32);
+    searchUnit.innerHTML = `<strong>°F</strong> |°C`;
+    return f;
+  }
 }
 
 function graphic(res) {
@@ -62,11 +102,11 @@ function graphic(res) {
   const temp3 = document.querySelector(".point3");
   const temp4 = document.querySelector(".point4");
   const temp5 = document.querySelector(".point5");
-  temp1.innerHTML = `${d1r}°`;
-  temp2.innerHTML = `${d2r}°`;
-  temp3.innerHTML = `${d3r}°`;
-  temp4.innerHTML = `${d4r}°`;
-  temp5.innerHTML = `${d5r}°`;
+  temp1.innerHTML = `${c2f(d1r)}°`;
+  temp2.innerHTML = `${c2f(d2r)}°`;
+  temp3.innerHTML = `${c2f(d3r)}°`;
+  temp4.innerHTML = `${c2f(d4r)}°`;
+  temp5.innerHTML = `${c2f(d5r)}°`;
   temp1.style.setProperty("--x1", `${g1 + 15}px`);
   temp2.style.setProperty("--x2", `${g2 + 15}px`);
   temp3.style.setProperty("--x3", `${g3 + 15}px`);
@@ -112,6 +152,7 @@ form.addEventListener("submit", (event) => {
   if (cityText === "") {
     alert("Be more serious!");
   } else {
+    cityTemp = cityText;
     document.getElementById("magic").style.opacity = "0";
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityText}&units=metric&appid=${apiKey}`;
     axios.get(url).then(getData, (event.target["name"].value = ""));
