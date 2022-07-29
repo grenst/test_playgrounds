@@ -8,7 +8,7 @@ function weatherStart(temp) {
 
 function demoStart() {
   unit = "c";
-  cityName = "Lisabon";
+  cityName = "Tišnov";
   cityTemp = cityName;
   weatherStart(cityName);
 }
@@ -43,16 +43,22 @@ function getData(response) {
 }
 
 function imgSky(value) {
-  let skyPos = document.querySelector(".sky-icon");
+  let skyPos = document.getElementById("weather-img");
   if (value === "Clear") {
-    skyPos.style.setProperty("--pos", `-125px -40px`);
+    skyPos.classList.add("clear");
+    skyPos.classList.remove("rain");
+    skyPos.classList.remove("clowds");
     return value;
   } else {
     if (value === "Rain") {
-      skyPos.style.setProperty("--pos", `-225px -230px`);
+      skyPos.classList.add("rain");
+      skyPos.classList.remove("clear");
+      skyPos.classList.remove("clowds");
       return value;
     } else {
-      skyPos.style.setProperty("--pos", `-375px -40px`);
+      skyPos.classList.add("clowds");
+      skyPos.classList.remove("rain");
+      skyPos.classList.remove("clear");
       return value;
     }
   }

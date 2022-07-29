@@ -21,6 +21,9 @@
   --x4: 55px;
   --x5: 95px;
   --pos: -125px -40px;
+  --clouds: visible;
+  --cl: 0;
+  --flash: 0;
 }
 
 body {
@@ -135,7 +138,7 @@ input {
   cursor: pointer;
 }
 
-.weather-img {
+#weather-img {
   display: inline-block;
   margin-right: 0;
 }
@@ -314,4 +317,185 @@ strong {
   justify-content: space-between;
   color: rgb(116, 171, 207);
   font-size: 12px;
+}
+
+/* ----------------- RAIN ---------------- */
+.rain {
+  height: 130px;
+  width: 130px;
+  background-image: linear-gradient(45deg, rgb(41, 74, 102), rgb(1, 20, 31));
+  box-shadow: -3px 3px 15px 5px rgba(2, 47, 77, 0.8), inset -43px 23px 35px 5px rgba(255, 255, 255, var(--flash));
+  border-radius: 30px;
+  visibility: visible;
+  animation: 3s slidein3 infinite ease-in-out;
+  isolation: isolate;
+}
+
+.rain:before {
+  content: "";
+  position: relative;
+  padding: 3px 30px;
+  top: 12px;
+  left: 50px;
+  margin-left: 10px;
+  border-radius: 15px;
+  background: rgb(83, 117, 126);
+  box-shadow: inset 3px -3px 5px 3px rgba(255, 255, 255, var(--flash));
+}
+
+.rain:after {
+  content: "";
+  position: relative;
+  padding: 15px 30px;
+  top: 45px;
+  left: 50px;
+  margin-left: -65px;
+  border-radius: 15px;
+  background: rgb(255, 255, 255);
+  animation: 3s slidein3 infinite ease-in-out;
+  visibility: var(--clowds);
+  clip-path: polygon(50% 0%, 25% 50%, 60% 50%, 35% 100%, 70% 40%, 50% 40%, 80% 0%);
+}
+
+@keyframes slidein3 {
+  0% {
+    --clowds: visible;
+    --flash: 1;
+  }
+  1% {
+    --clowds: hidden;
+    --flash: 0;
+  }
+  2% {
+    --clowds: visible;
+    --flash: 1;
+  }
+  5% {
+    --clowds: hidden;
+    --flash: 0;
+  }
+  49% {
+    --clowds: hidden;
+    --flash: 0;
+  }
+  50% {
+    --clowds: visible;
+    --flash: 1;
+  }
+  56% {
+    --clowds: hidden;
+    --flash: 0;
+  }
+  97% {
+    --clowds: hidden;
+    --flash: 0;
+  }
+  100% {
+    --clowds: visible;
+    --flash: 1;
+  }
+}
+
+/*-------------------------- CLEAR SKY ----------------- */
+.clear {
+  height: 130px;
+  width: 130px;
+  background-image: linear-gradient(45deg, rgb(204, 50, 3), rgb(240, 110, 3));
+  box-shadow: -3px 3px 25px 12px rgba(255, 239, 22, 0.3);
+  border-radius: 30px;
+  visibility: var(--clowds);
+  isolation: isolate;
+}
+
+.clear:before {
+  content: "";
+  position: relative;
+  padding: 13px 22px;
+  top: 17px;
+  left: 60px;
+  margin-left: 20px;
+  border-radius: 25px;
+  background: rgb(253, 237, 4);
+  visibility: var(--clowds);
+}
+
+.clear:after {
+  content: "";
+  position: relative;
+  padding: 30px 40px;
+  top: 28px;
+  left: 45px;
+  margin-left: -60px;
+  border-radius: 40px;
+  background-image: linear-gradient(40deg, rgb(240 110 3 / 0.2), rgba(252, 223, 96, 0.6), rgb(240 110 3 / 0.2));
+  background-size: 400%;
+  opacity: 1;
+  animation: 9s slidein2 infinite ease-in-out;
+  visibility: var(--clowds);
+}
+
+@keyframes slidein2 {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    background-position: left;
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(13);
+    background-position: right;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    background-position: left;
+  }
+}
+
+/* ------------ CLOWDS ---------------- */
+.clowds {
+  height: 130px;
+  width: 130px;
+  background-image: linear-gradient(45deg, rgb(0, 72, 121), rgb(0, 146, 110));
+  box-shadow: -3px 3px 15px 5px rgba(0, 72, 121, 0.8);
+  border-radius: 30px;
+  visibility: var(--clowds);
+}
+
+.clowds:before {
+  content: "";
+  position: relative;
+  padding: 12px 17px;
+  top: 20px;
+  left: 50px;
+  margin-left: 20px;
+  border-radius: 25px;
+  background: rgb(169, 236, 253);
+  animation: 3s slidein infinite ease-in-out;
+  visibility: var(--clowds);
+}
+
+.clowds:after {
+  content: "";
+  position: relative;
+  padding: 3px 30px;
+  top: 30px;
+  left: 30px;
+  margin-left: -45px;
+  border-radius: 15px;
+  background: rgb(169, 236, 253);
+  animation: 3s slidein infinite ease-in-out;
+  visibility: var(--clowds);
+}
+
+@keyframes slidein {
+  0% {
+    left: 50px;
+  }
+  50% {
+    left: 70px;
+  }
+  100% {
+    left: 50px;
+  }
 }
