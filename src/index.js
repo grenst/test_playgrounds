@@ -8,7 +8,7 @@ function weatherStart(temp) {
 
 function demoStart() {
   unit = "c";
-  cityName = "Tišnov";
+  cityName = "Tiraspol";
   cityTemp = cityName;
   weatherStart(cityName);
 }
