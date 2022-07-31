@@ -1,4 +1,5 @@
 const apiKey = "fe0e0a19e1606bdfe513d213f2be135a";
+let correct;
 
 function weatherStart(temp) {
   cityName = temp;
@@ -8,7 +9,7 @@ function weatherStart(temp) {
 
 function demoStart() {
   unit = "c";
-  cityName = "Tiraspol";
+  cityName = "Abu Dhabi";
   cityTemp = cityName;
   weatherStart(cityName);
 }
@@ -22,6 +23,19 @@ function getData(response) {
   cityName = response.data.name;
   let temperature = response.data.main.temp;
   let temp = Math.round(temperature);
+  if (temp > 40) {
+    correct = 16;
+  } else {
+    if (temp < 20) {
+      correct = -15;
+    } else {
+      if (temp < 10) {
+        correct = -5;
+      } else {
+      }
+    }
+    correct = 8;
+  }
   let windSpeed = response.data.wind.speed;
   let windSp = Math.round(windSpeed);
   let hummi = response.data.main.humidity;
@@ -155,7 +169,7 @@ function zeroBefore(inver) {
 }
 
 function persGraf(vari) {
-  let a = 100 - (vari - 8) * 4;
+  let a = 100 - (vari - correct) * 4;
   return a;
 }
 

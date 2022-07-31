@@ -54,7 +54,7 @@ body {
   position: absolute;
   top: 500px;
   width: 600px;
-  height: 1000px;
+  height: 1800px;
   background-image: radial-gradient(#0000, #000 75%),
     repeating-conic-gradient(from 45deg, #111 0deg 90deg, #333 90deg 180deg);
   background-size: 100%, 50px 50px;
@@ -97,13 +97,24 @@ h1 {
 }
 
 .container {
-  background: rgba(50, 50, 50, 0.5);
   width: 650px;
   padding: 2em;
   border-radius: 20px;
-  animation: gradient 10s infinite;
+  animation: gradient 1s infinite;
   background-size: 400%;
-  background-image: var(--gradient);
+  /* background-image: var(--gradient); */
+}
+
+@keyframes transparent {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
 }
 
 .search {
@@ -122,22 +133,26 @@ h1 {
 }
 
 .search-barinput {
+  position: relative;
   display: flex;
   flex-direction: row;
+  line-height: 45px;
   border: 1px solid rgb(230, 197, 135);
-  background-color: #1a2038;
+  background-color: transparent;
   border-radius: 25px;
   padding: 3px;
   box-shadow: 3px 3px 15px 5px rgba(20, 20, 0, 0.3);
 }
 
 .search-bar__input {
+  position: relative;
+  top: -37px;
   color: bisque;
-  background-color: #1a2038;
+  background-color: transparent;
   border: none;
   font-size: 24px;
-  vertical-align: 15%;
-  width: 80px;
+  line-height: 44px;
+  width: 85px;
   padding-left: 10px;
   transition: all 0.3s ease-in-out;
 }
@@ -148,19 +163,20 @@ input {
 .search-bar__input:focus {
   outline: none;
   width: 300px;
-  background-color: #1a2038;
+  background-color: transparent;
 }
 
 .search-button {
-  height: 37px;
-  width: 37px;
+  height: 39px;
+  width: 39px;
   border: none;
-  vertical-align: 50%;
+  vertical-align: 80%;
   border-radius: 19px;
   background-image: var(--gradientBtn);
   background-size: 400%;
   background-position: left;
   transition: background-position 0.2s ease-out;
+  font-size: 20px;
 }
 
 .search-button:hover {
@@ -170,6 +186,7 @@ input {
 .search-button,
 .loc {
   cursor: pointer;
+  color: #333;
 }
 
 #weather-img {
@@ -496,4 +513,26 @@ strong {
   100% {
     left: 50px;
   }
+}
+
+.forecast-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.row {
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.col-2 {
+  border: 4px solid transparent;
+  transition: all 0.3s;
+}
+
+.col-2:hover {
+  border: 4px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fff2;
 }
