@@ -23,7 +23,7 @@ function getData(response) {
   cityName = response.data.name;
   let temperature = response.data.main.temp;
   let temp = Math.round(temperature);
-  if (temp > 40) {
+  if (temp > 39) {
     correct = 16;
   } else {
     if (temp < 20) {
