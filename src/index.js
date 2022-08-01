@@ -131,16 +131,36 @@ function roundIts(value) {
 function graphic(res) {
   let dayz = [7, 15, 23, 31, 39];
   let forecast = '<div class="row">';
-  dayz.forEach((element) => {
-    nextForecast = `<div class="col-2 f1">
+  let firstHourForecast = new Date(res.data.list[8].dt * 1000).getHours() + 1;
+  console.log(res.data);
+  console.log(firstHourForecast);
+  if (firstHourForecast != 12) {
+    dayz.forEach((element) => {
+      let arr = (21 - firstHourForecast) / 3 + element;
+      let nightArr = arr - 4;
+      console.log(`${arr}-${nightArr}`);
+      nextForecast = `<div class="col-2 f1">
+                  ${dateForecast(new Date(res.data.list[arr].dt * 1000))}
+                  ${skyForecast(res.data.list[arr].weather[0].main)}
+                  <strong>${c2f(roundIts(res.data.list[arr].main.temp_max))}°</strong> - ${c2f(
+        roundIts(res.data.list[nightArr].main.temp_min)
+      )}°
+                </div>`;
+      forecast = forecast + nextForecast;
+    });
+  } else {
+    dayz.forEach((element) => {
+      let night = element + 4;
+      nextForecast = `<div class="col-2 f1">
                   ${dateForecast(new Date(res.data.list[element].dt * 1000))}
                   ${skyForecast(res.data.list[element].weather[0].main)}
                   <strong>${c2f(roundIts(res.data.list[element].main.temp_max))}°</strong> - ${c2f(
-      roundIts(res.data.list[element].main.temp_min)
-    )}°
+        roundIts(res.data.list[night].main.temp_min)
+      )}°
                 </div>`;
-    forecast = forecast + nextForecast;
-  });
+      forecast = forecast + nextForecast;
+    });
+  }
   let d1r = roundIts(res.data.list[0].main.temp_max);
   let g1 = persGraf(d1r);
   let date1ms = res.data.list[0].dt * 1000;
@@ -201,7 +221,7 @@ function timeGraph(timer) {
 }
 
 function dateForecast(timer) {
-  let dayForecast = zeroBefore(timer.getDate());
+  let dayForecast = zeroBefore(timer.getHours());
   let monthForecast = zeroBefore(timer.getMonth() + 1);
   let c = `${dayForecast}:${monthForecast}`;
   return c;
