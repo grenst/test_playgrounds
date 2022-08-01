@@ -19,14 +19,14 @@ function correction(temp) {
     correct = 16;
   } else {
     if (temp < 20) {
-      correct = -15;
+      correct = -16;
     } else {
       if (temp < 10) {
         correct = -5;
       } else {
       }
     }
-    correct = 8;
+    correct = 0;
   }
 }
 
@@ -93,15 +93,15 @@ function imgSky(value) {
 }
 
 function skyForecast(value) {
-  let imgForecast = `<img src="images/sunny.png" alt=""></img>`;
+  let imgForecast = `<img class="iamge" src="images/sunny.png" alt=""></img>`;
   if (value === "Clear") {
     return imgForecast;
   } else {
     if (value === "Rain") {
-      imgForecast = `<img src="images/thunderstorms.png" alt=""></img>`;
+      imgForecast = `<img class="iamge" src="images/thunderstorms.png" alt=""></img>`;
       return imgForecast;
     } else {
-      imgForecast = `<img src="images/partly_cloudy.png" alt=""></img>`;
+      imgForecast = `<img class="iamge" src="images/partly_cloudy.png" alt=""></img>`;
       return imgForecast;
     }
   }

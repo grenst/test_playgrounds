@@ -207,6 +207,11 @@ input {
   box-shadow: 3px 3px 10px 5px rgba(151, 87, 255, 0.2);
 }
 
+.iamge {
+  display: block;
+  margin: 0 auto;
+}
+
 .city-info {
   padding: 20px 0;
   display: flex;
@@ -216,6 +221,18 @@ input {
 .city-name {
   color: rgb(238, 238, 209);
   font-size: 40px;
+  animation: 0.5s animation-slideRightHide ease-in-out forwards;
+}
+
+@keyframes animation-slideRightHide {
+  from {
+    opacity: 0;
+    transform: translateX(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .info {
@@ -229,6 +246,14 @@ input {
   display: flex;
   height: 77px;
   gap: 190px;
+  opacity: 0;
+  animation: showwords 2.5s ease forwards;
+}
+
+@keyframes showwords {
+  to {
+    opacity: 1;
+  }
 }
 
 .temperature {
