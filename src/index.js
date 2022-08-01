@@ -218,7 +218,7 @@ function timeGraph(timer) {
 }
 
 function dateForecast(timer) {
-  let dayForecast = zeroBefore(timer.getHours());
+  let dayForecast = zeroBefore(timer.getDay());
   let monthForecast = zeroBefore(timer.getMonth() + 1);
   let c = `${dayForecast}:${monthForecast}`;
   return c;
