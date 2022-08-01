@@ -14,16 +14,8 @@ function demoStart() {
   weatherStart(cityName);
 }
 
-let unit;
-let cityName;
-let cityTemp;
-demoStart();
-
-function getData(response) {
-  cityName = response.data.name;
-  let temperature = response.data.main.temp;
-  let temp = Math.round(temperature);
-  if (temp > 39) {
+function correction(temp) {
+  if (temp > 35) {
     correct = 16;
   } else {
     if (temp < 20) {
@@ -36,6 +28,28 @@ function getData(response) {
     }
     correct = 8;
   }
+}
+
+function chekerUnits() {
+  if (unit === "c") {
+    weatherStart();
+    unit = "f";
+  } else {
+    weatherStart();
+    unit = "c";
+  }
+}
+
+let unit;
+let cityName;
+let cityTemp;
+demoStart();
+
+function getData(response) {
+  cityName = response.data.name;
+  let temperature = response.data.main.temp;
+  let temp = Math.round(temperature);
+  correction(temp);
   let windSpeed = response.data.wind.speed;
   let windSp = Math.round(windSpeed);
   let hummi = response.data.main.humidity;
@@ -78,13 +92,18 @@ function imgSky(value) {
   }
 }
 
-function chekerUnits() {
-  if (unit === "c") {
-    weatherStart();
-    unit = "f";
+function skyForecast(value) {
+  let imgForecast = `<img src="images/sunny.png" alt=""></img>`;
+  if (value === "Clear") {
+    return imgForecast;
   } else {
-    weatherStart();
-    unit = "c";
+    if (value === "Rain") {
+      imgForecast = `<img src="images/thunderstorms.png" alt=""></img>`;
+      return imgForecast;
+    } else {
+      imgForecast = `<img src="images/partly_cloudy.png" alt=""></img>`;
+      return imgForecast;
+    }
   }
 }
 
@@ -102,29 +121,43 @@ function c2f(tempUnit) {
   }
 }
 
+let nextForecast;
+
+function roundIts(value) {
+  let q = Math.round(value);
+  return q;
+}
+
 function graphic(res) {
-  let d1 = res.data.list[0].main.temp_max;
-  let d1r = Math.round(d1);
+  let dayz = [7, 15, 23, 31, 39];
+  let forecast = '<div class="row">';
+  dayz.forEach((element) => {
+    nextForecast = `<div class="col-2 f1">
+                  ${dateForecast(new Date(res.data.list[element].dt * 1000))}
+                  ${skyForecast(res.data.list[element].weather[0].main)}
+                  <strong>${c2f(roundIts(res.data.list[element].main.temp_max))}°</strong> - ${c2f(
+      roundIts(res.data.list[element].main.temp_min)
+    )}°
+                </div>`;
+    forecast = forecast + nextForecast;
+  });
+  let d1r = roundIts(res.data.list[0].main.temp_max);
   let g1 = persGraf(d1r);
   let date1ms = res.data.list[0].dt * 1000;
   let date1dt = new Date(date1ms);
-  let d2 = res.data.list[1].main.temp_max;
-  let d2r = Math.round(d2);
+  let d2r = roundIts(res.data.list[1].main.temp_max);
   let g2 = persGraf(d2r);
   let date2ms = res.data.list[1].dt * 1000;
   let date2dt = new Date(date2ms);
-  let d3 = res.data.list[2].main.temp_max;
-  let d3r = Math.round(d3);
+  let d3r = roundIts(res.data.list[2].main.temp_max);
   let g3 = persGraf(d3r);
   let date3ms = res.data.list[2].dt * 1000;
   let date3dt = new Date(date3ms);
-  let d4 = res.data.list[3].main.temp_max;
-  let d4r = Math.round(d4);
+  let d4r = roundIts(res.data.list[3].main.temp_max);
   let g4 = persGraf(d4r);
   let date4ms = res.data.list[3].dt * 1000;
   let date4dt = new Date(date4ms);
-  let d5 = res.data.list[4].main.temp_max;
-  let d5r = Math.round(d5);
+  let d5r = roundIts(res.data.list[4].main.temp_max);
   let g5 = persGraf(d5r);
   let date5ms = res.data.list[4].dt * 1000;
   let date5dt = new Date(date5ms);
@@ -138,26 +171,40 @@ function graphic(res) {
   const temp3 = document.querySelector(".point3");
   const temp4 = document.querySelector(".point4");
   const temp5 = document.querySelector(".point5");
+  let displayForecast = document.querySelector("#forecast");
   temp1.innerHTML = `${c2f(d1r)}°`;
   temp2.innerHTML = `${c2f(d2r)}°`;
   temp3.innerHTML = `${c2f(d3r)}°`;
   temp4.innerHTML = `${c2f(d4r)}°`;
   temp5.innerHTML = `${c2f(d5r)}°`;
+  displayForecast.innerHTML = forecast + `</div>`;
   temp1.style.setProperty("--x1", `${g1 + 15}px`);
   temp2.style.setProperty("--x2", `${g2 + 15}px`);
   temp3.style.setProperty("--x3", `${g3 + 15}px`);
   temp4.style.setProperty("--x4", `${g4 + 15}px`);
   temp5.style.setProperty("--x5", `${g5 + 15}px`);
   let timmi1 = document.querySelector(".time1");
-  timmi1.innerHTML = `${zeroBefore(date1dt.getHours())}:${zeroBefore(date1dt.getMinutes())}`;
+  timmi1.innerHTML = timeGraph(date1dt);
   let timmi2 = document.querySelector(".time2");
-  timmi2.innerHTML = `${zeroBefore(date2dt.getHours())}:${zeroBefore(date2dt.getMinutes())}`;
+  timmi2.innerHTML = timeGraph(date2dt);
   let timmi3 = document.querySelector(".time3");
-  timmi3.innerHTML = `${zeroBefore(date3dt.getHours())}:${zeroBefore(date3dt.getMinutes())}`;
+  timmi3.innerHTML = timeGraph(date3dt);
   let timmi4 = document.querySelector(".time4");
-  timmi4.innerHTML = `${zeroBefore(date4dt.getHours())}:${zeroBefore(date4dt.getMinutes())}`;
+  timmi4.innerHTML = timeGraph(date4dt);
   let timmi5 = document.querySelector(".time5");
-  timmi5.innerHTML = `${zeroBefore(date5dt.getHours())}:${zeroBefore(date5dt.getMinutes())}`;
+  timmi5.innerHTML = timeGraph(date5dt);
+}
+
+function timeGraph(timer) {
+  let b = `${zeroBefore(timer.getHours())}:${zeroBefore(timer.getMinutes())}`;
+  return b;
+}
+
+function dateForecast(timer) {
+  let dayForecast = zeroBefore(timer.getDate());
+  let monthForecast = zeroBefore(timer.getMonth() + 1);
+  let c = `${dayForecast}:${monthForecast}`;
+  return c;
 }
 
 function zeroBefore(inver) {
