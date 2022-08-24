@@ -235,7 +235,6 @@ function zeroBefore(inver) {
 
 function persGraf(vari) {
   let a = 100 - (vari - correct) * 4;
-  console.log(`${correct}`);
   return a;
 }
 
