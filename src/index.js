@@ -14,19 +14,20 @@ function demoStart() {
   weatherStart(cityName);
 }
 
+// Calculating correction for graphic depend from temp//
 function correction(temp) {
-  if (temp > 35) {
+  if (temp > 25) {
     correct = 16;
   } else {
-    if (temp < 20) {
+    if (temp < 0) {
       correct = -16;
     } else {
       if (temp < 10) {
-        correct = -5;
+        correct = -4;
       } else {
+        correct = 4;
       }
     }
-    correct = 0;
   }
 }
 
@@ -134,7 +135,7 @@ function graphic(res) {
   let firstHourForecast = new Date(res.data.list[8].dt * 1000).getHours() + 1;
   if (firstHourForecast != 12) {
     dayz.forEach((element) => {
-      let arr = (21 - firstHourForecast) / 3 + element;
+      let arr = (21 - firstHourForecast) / 3 + element - 1;
       let nightArr = arr - 4;
       nextForecast = `<div class="col-2 f1">
                   ${dateForecast(new Date(res.data.list[arr].dt * 1000))}
@@ -218,7 +219,7 @@ function timeGraph(timer) {
 }
 
 function dateForecast(timer) {
-  let dayForecast = zeroBefore(timer.getDay());
+  let dayForecast = zeroBefore(timer.getDate());
   let monthForecast = zeroBefore(timer.getMonth() + 1);
   let c = `${dayForecast}:${monthForecast}`;
   return c;
@@ -234,6 +235,7 @@ function zeroBefore(inver) {
 
 function persGraf(vari) {
   let a = 100 - (vari - correct) * 4;
+  console.log(`${correct}`);
   return a;
 }
 
