@@ -133,10 +133,11 @@ function graphic(res) {
   let dayz = [7, 15, 23, 31, 39];
   let forecast = '<div class="row">';
   let firstHourForecast = new Date(res.data.list[8].dt * 1000).getHours() + 1;
-  if (firstHourForecast != 12) {
+  if (firstHourForecast >= 12) {
     dayz.forEach((element) => {
-      let arr = (21 - firstHourForecast) / 3 + element - 1;
+      let arr = (21 - firstHourForecast) / 3 + element - 4;
       let nightArr = arr - 4;
+      console.log(`${arr} - ${firstHourForecast}`);
       nextForecast = `<div class="col-2 f1">
                   ${dateForecast(new Date(res.data.list[arr].dt * 1000))}
                   ${skyForecast(res.data.list[arr].weather[0].main)}
