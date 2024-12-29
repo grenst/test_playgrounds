@@ -130,88 +130,44 @@ function roundIts(value) {
 }
 
 function graphic(res) {
-  let dayz = [7, 15, 23, 31, 39];
-  let forecast = '<div class="row">';
-  let firstHourForecast = new Date(res.data.list[8].dt * 1000).getHours() + 1;
-  if (firstHourForecast >= 12) {
-    dayz.forEach((element) => {
-      let arr = (21 - firstHourForecast) / 3 + element - 4;
-      let nightArr = arr - 4;
-      console.log(`${arr} - ${firstHourForecast}`);
-      nextForecast = `<div class="col-2 f1">
-                  ${dateForecast(new Date(res.data.list[arr].dt * 1000))}
-                  ${skyForecast(res.data.list[arr].weather[0].main)}
-                  <strong>${c2f(roundIts(res.data.list[arr].main.temp_max))}°</strong> - ${c2f(
-        roundIts(res.data.list[nightArr].main.temp_min)
-      )}°
-                </div>`;
-      forecast = forecast + nextForecast;
-    });
-  } else {
-    dayz.forEach((element) => {
-      let night = element + 4;
-      nextForecast = `<div class="col-2 f1">
-                  ${dateForecast(new Date(res.data.list[element].dt * 1000))}
-                  ${skyForecast(res.data.list[element].weather[0].main)}
-                  <strong>${c2f(roundIts(res.data.list[element].main.temp_max))}°</strong> - ${c2f(
-        roundIts(res.data.list[night].main.temp_min)
-      )}°
-                </div>`;
-      forecast = forecast + nextForecast;
-    });
+  if (!res.data || !res.data.list || res.data.list.length < 5) {
+    console.error("Недостаточно данных для графика.");
+    return;
   }
+
   let d1r = roundIts(res.data.list[0].main.temp_max);
+  let d2r = roundIts(res.data.list[2].main.temp_max); // Каждые 6 часов
+  let d3r = roundIts(res.data.list[4].main.temp_max);
+  let d4r = roundIts(res.data.list[6].main.temp_max);
+  let d5r = roundIts(res.data.list[8].main.temp_max);
+
   let g1 = persGraf(d1r);
-  let date1ms = res.data.list[0].dt * 1000;
-  let date1dt = new Date(date1ms);
-  let d2r = roundIts(res.data.list[1].main.temp_max);
   let g2 = persGraf(d2r);
-  let date2ms = res.data.list[1].dt * 1000;
-  let date2dt = new Date(date2ms);
-  let d3r = roundIts(res.data.list[2].main.temp_max);
   let g3 = persGraf(d3r);
-  let date3ms = res.data.list[2].dt * 1000;
-  let date3dt = new Date(date3ms);
-  let d4r = roundIts(res.data.list[3].main.temp_max);
   let g4 = persGraf(d4r);
-  let date4ms = res.data.list[3].dt * 1000;
-  let date4dt = new Date(date4ms);
-  let d5r = roundIts(res.data.list[4].main.temp_max);
   let g5 = persGraf(d5r);
-  let date5ms = res.data.list[4].dt * 1000;
-  let date5dt = new Date(date5ms);
+
   const element = document.querySelector(".days-graph");
   let polygon = `polygon(0% ${g1}%, 25% ${g2}%, 50% ${g3}%, 75% ${g4}%, 100% ${g5}%, 100% 100%, 0% 100%)`;
+
+  if ([g1, g2, g3, g4, g5].some((g) => g < 0 || g > 100)) {
+    console.error("Некорректные значения графика:", g1, g2, g3, g4, g5);
+    return;
+  }
+
   element.style.setProperty("--polygone", polygon);
-  let graphic = document.querySelector(".days-graph");
-  graphic.innerHTML = res.data.list[0].dt_txt;
+
   const temp1 = document.querySelector(".point1");
   const temp2 = document.querySelector(".point2");
   const temp3 = document.querySelector(".point3");
   const temp4 = document.querySelector(".point4");
   const temp5 = document.querySelector(".point5");
-  let displayForecast = document.querySelector("#forecast");
+
   temp1.innerHTML = `${c2f(d1r)}°`;
   temp2.innerHTML = `${c2f(d2r)}°`;
   temp3.innerHTML = `${c2f(d3r)}°`;
   temp4.innerHTML = `${c2f(d4r)}°`;
   temp5.innerHTML = `${c2f(d5r)}°`;
-  displayForecast.innerHTML = forecast + `</div>`;
-  temp1.style.setProperty("--x1", `${g1 + 15}px`);
-  temp2.style.setProperty("--x2", `${g2 + 15}px`);
-  temp3.style.setProperty("--x3", `${g3 + 15}px`);
-  temp4.style.setProperty("--x4", `${g4 + 15}px`);
-  temp5.style.setProperty("--x5", `${g5 + 15}px`);
-  let timmi1 = document.querySelector(".time1");
-  timmi1.innerHTML = timeGraph(date1dt);
-  let timmi2 = document.querySelector(".time2");
-  timmi2.innerHTML = timeGraph(date2dt);
-  let timmi3 = document.querySelector(".time3");
-  timmi3.innerHTML = timeGraph(date3dt);
-  let timmi4 = document.querySelector(".time4");
-  timmi4.innerHTML = timeGraph(date4dt);
-  let timmi5 = document.querySelector(".time5");
-  timmi5.innerHTML = timeGraph(date5dt);
 }
 
 function timeGraph(timer) {
