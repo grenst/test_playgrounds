@@ -36,7 +36,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 40px;
   align-items: center;
 }
 
@@ -94,8 +93,8 @@ h1 {
 
 .container {
   width: 650px;
-  padding: 2em;
-  border-radius: 20px;
+  /* padding: 2em;
+  border-radius: 20px; */
   animation: gradient 1s infinite;
   background-size: 400%;
   /* background-image: var(--gradient); */
@@ -582,15 +581,25 @@ strong {
 @media (max-width: 768px) {
   .weather-app {
     min-width: 100%;
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .container {
     width: 100%;
-    padding: 10px;
+    padding: 0 10px;
   }
 
   /* .days-graph {
     height: 80px;
   } */
+}
+
+@media (max-width: 520px) {
+  .name-app {
+    font-size: 2em;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
 }
